@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div id="divPage">
+      <div id="divTop">
+        <%-include('header')%>
+      </div>
+      <div id="divCenter">
+        <div id="divMenu">
+          <%-include('menu')%>
+        </div>
+        <div id="divContent"></div>
+      </div>
+      <div id="divBottom">
+        <%-include('footer')%>
+      </div>
+    </div>
+  </body>
+</html>

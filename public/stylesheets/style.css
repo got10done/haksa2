@@ -1,0 +1,26 @@
+body{background:white;}
+#divPage{width:980px; background:white; box-shadow:0px 0px 40px darkslategrey; margin:auto;}
+#divTop{padding:30px 0px 0px 0px; text-align:center;}
+#divCenter{border:1px solid lightblue; margin:10px; padding-bottom:20px;}
+
+
+#divMenu{overflow:hidden; background:#EAEAEA;padding:10px; border-bottom:1px solid lightblue;}
+#divMenu{overflow:hidden; background:#EAEAEA; margin:20px; padding:10px;}
+
+#divMenu .item{width:100px;float:left;text-align:center;box-sizing:border-box;}
+#divMenu .item{width:25%; float:left;  font-size: 20px; text-align: center;}
+
+
+#divContent{width:930px; text-align:center; margin:10px auto;}
+#divBottom{padding:0px 0px 10px 0px; text-align:center;}
+#divHeader{width:980px;} a {box-sizing:border-box;text-align:center;color: blue; text-decoration: none;}
+a:hover{font-weight:bold;}
+table{border-collapse:collapse; text-align:center; margin:auto;}
+td{border:darkslategrey solid 1px; text-align:center;padding:5px;}
+#trh{background:lightblue;font-weight:bold;font-size:20px;}
+tr:hover{background:lightgoldenrodyellow; font-weight:bold;}
+#divCondition{margin:10px;}
+#searchType{font-size:18px; font-weight:bold;margin:10px;}
+#keyword{font-size:18px; font-weight:bold;margin:10px;}
+#count{color:sienna; font-weight:bold;}
+#selSize{font-size:15px;margin:10px;}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div id="divPage">
+      <div id="divTop">
+        <%-include('../header')%>
+      </div>
+      <div id="divCenter">
+        <div id="divMenu">
+          <%-include('../menu')%>
+        </div>
+        <div id="divContent">
+            <h2>[수강신청목록]</h2>
+            <div id="divCondition">
+              <select id="searchType">
+                <option value="lcode">과목코드</option>
+                <option value="lname">강좌이름</option>
+                <option value="scode">학생번호</option>
+                <option value="sname">학생번호</option>
+              </select>
+              <input type="text" id="keyword" placeholder=" 검색어 입력" autofocus/>
+               <span id="count"></span>
+            
+            </div>
+            <table id="tbl"></table>
+            <script id="temp" type="text/x-handlebars-template">
+              <tr id="trh"> 
+                <td width=100>과목코드</td>
+                <td width=300>과목명</td>
+                <td width=100>학생번호</td>
+                <td width=100>학생명</td>
+                <td width=300>수강신청일</td>
+                <td width=100>점수</td>
+              </tr>
+              {{#each list}}
+              <tr class="row">
+                <td width=100>{{lcode}}</td>
+                <td width=300>{{lname}}</td>
+                <td width=100>{{scode}}</td>
+                <td width=100>{{sname}}</td>
+                <td width=300>{{strEdate}}</td>
+                <td width=100>{{grade}}</td>
+              </tr>
+              {{/each}}
+            </script>
+            <div id="pagination">
+              <button id="btnPre"> ◀ </button>
+              <span id="pageNow"></span>
+              <button id="btnNext"> ▶ </button>
+            </div>
+        </div>
+      </div>
+      <div id="divBottom">
+        <%-include('../footer')%>
+      </div>
+    </div>
+  </body>
+  <script>
+    var page=1;
+    
+    getList();
+    $("#btnPre").on("click",function(){
+      page--;
+      getList();
+    });
+    $("#btnNext").on("click",function(){
+      page++;
+      getList();
+    });
+    
+    $("#searchType").on("click",function(){
+      page=1;
+      getList();
+    });
+    $("#keyword").on("keydown",function(e){
+      if(e.keyCode==13){
+        page=1;
+        getList();
+      }
+    });
+    function getList(){
+      //var size=$("#selSize").val();
+      var searchType=$("#searchType").val();
+      var keyword=$("#keyword").val();
+      $.ajax({
+        type:"get",
+        url:"/enroll/list.json",   // localhost:3000을 기본으로 한다
+        dataType:"json",
+        data:{"searchType":searchType, "keyword":keyword, "page":page},   //입력변수를 함수 안에 만들어 주면 data를 입력해줘야함
+        success:function(data){
+          
+          var lastPage=Math.ceil(data.count/10);
+          var temp=Handlebars.compile($("#temp").html());
+          $("#tbl").html(temp(data));
+          $("#count").html("검색수 : "+ data.count+"명 ");
+          $("#pageNow").html("현재페이지 : "+page+" / "+lastPage);
+          if(page==1){
+            $("#btnPre").attr("disabled",true);
+          }else $("#btnPre").attr("disabled",false);
+          if(page==lastPage){
+            $("#btnNext").attr("disabled",true);
+          }else $("#btnNext").attr("disabled",false);
+        }
+      });
+    }
+  </script>
+</html>
